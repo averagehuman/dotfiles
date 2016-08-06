@@ -1,6 +1,7 @@
 
+*~
 *.pyc
 *.egg-info
 *.swp
-vim/plugged
-vim/.netrwhist
+plugged/
+.netrwhist

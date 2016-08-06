@@ -1,9 +1,29 @@
 
 
 SHELL := /bin/bash
-PWD ?= $(shell pwd)
+PWD := $(shell pwd)
+NEOVIM_PY2_ENV := $(HOME)/.pyenv/neovim
+NEOVIM_PY3_ENV := $(HOME)/.pyenv3/neovim
+NEOVIM_CONF_DIR := $(HOME)/.config/nvim
 
-install: install-bin install-git install-vim install-bash install-postgres
+environ:
+	@echo $(NEOVIM_PY2_ENV)
+
+# fuzzy file finder https://github.com/junegunn/fzf
+fzf:
+	@if [ ! -e $(HOME)/.fzf ]; then \
+		git clone https://github.com/junegunn/fzf.git $(HOME)/.fzf; \
+	else \
+	     cd $(HOME)/.fzf && git pull; \
+	fi
+	@cd $(HOME)/.fzf && ./install
+
+ubuntu-support:
+	@apt-get -y install python-dev python-pip python3-dev python3-pip
+	@add-apt-repository ppa:neovim-ppa/unstable
+	@apt-get update
+	@apt-get -y install neovim
+	@apt-get -y install silversearcher-ag
 
 install-bin:
 	@mkdir -p ~/bin/
@@ -24,11 +44,29 @@ install-vim:
 	@ln -fs $(PWD)/vim/syntax ~/.vim/syntax
 	@vim +PlugInstall +qall
 
+install-neovim:
+	@if [ ! -e $(NEOVIM_PY2_ENV) ]; then \
+		mkdir -p $(NEOVIM_PY2_ENV) && virtualenv --python=python2 $(NEOVIM_PY2_ENV); \
+		$(NEOVIM_PY2_ENV)/bin/pip install -U pip; \
+	fi
+	@$(NEOVIM_PY2_ENV)/bin/pip install -r $(PWD)/neovim/requirements.txt
+	@if [ ! -e $(NEOVIM_PY3_ENV) ]; then \
+		mkdir -p $(NEOVIM_PY3_ENV) && virtualenv --python=python3 $(NEOVIM_PY3_ENV); \
+		$(NEOVIM_PY3_ENV)/bin/pip install -U pip; \
+	fi
+	@$(NEOVIM_PY3_ENV)/bin/pip install -r $(PWD)/neovim/requirements.txt
+	@rm -rf $(NEOVIM_CONF_DIR) && ln -fs $(PWD)/neovim/nvim $(NEOVIM_CONF_DIR)
+	@nvim +PlugInstall +qall
+
 install-bash:
-	@ln -fs $(PWD)/bash/bashrc ~/.bash_profile
-	@ln -fs ~/.bash_profile ~/.bashrc
+	@ln -fs $(PWD)/bash/bashrc ~/.bashrc
+	@ln -fs $(PWD)/bash/bash_profile ~/.bash_profile
 	@if [ $$(uname) == "Darwin" ]; then ln -fs $(PWD)/bash/osx_profile ~/.osx_profile; fi
 
 install-postgres:
 	@ln -fs $(PWD)/psqlrc ~/.psqlrc
+
+install: install-bin install-git install-vim install-bash install-postgres
+
+ubuntu: fzf ubuntu-support install
 

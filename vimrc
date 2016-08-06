@@ -91,16 +91,13 @@ Plug 'scrooloose/syntastic'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'Bling/vim-airline'
-Plug 'majutsushi/tagbar'
-Plug 'jmcantrell/vim-virtualenv'
+"Plug 'Bling/vim-airline'
+"Plug 'majutsushi/tagbar'
 
 Plug 'ervandew/supertab'
 Plug 'Valloric/MatchTagAlways'
 Plug 'othree/html5.vim'
-Plug 'ap/vim-css-color'
-Plug 'mjbrownie/vim-htmldjango_omnicomplete'
+"Plug 'ap/vim-css-color'
 
 " Colors
 "Plug 'altercation/vim-colors-solarized'
@@ -122,6 +119,7 @@ call plug#end()
 syntax enable
 filetype plugin indent on
 set background=dark
+set t_Co=256
 colorscheme darkblossom256
 
 let python_highlight_all = 1

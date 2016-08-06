@@ -16,15 +16,21 @@ fzf:
 	else \
 	     cd $(HOME)/.fzf && git pull; \
 	fi
-	@cd $(HOME)/.fzf && ./install
+	@cd $(HOME)/.fzf && ./install --no-key-bindings --no-completion --no-update-rc
 
 ubuntu-support:
 	@apt-get -y install python-dev python-pip python3-dev python3-pip
-	@add-apt-repository ppa:neovim-ppa/unstable
+	@add-apt-repository -y ppa:neovim-ppa/unstable
 	@apt-get update
 	@apt-get -y install neovim
 	@apt-get -y install silversearcher-ag
 
+# needs sudo
+ubuntu: ubuntu-support fzf
+
+#----------------------------------------------------------------------------------------
+# install targets
+#----------------------------------------------------------------------------------------
 install-bin:
 	@mkdir -p ~/bin/
 	@ln -fs $(PWD)/bin/* ~/bin/
@@ -63,10 +69,11 @@ install-bash:
 	@ln -fs $(PWD)/bash/bash_profile ~/.bash_profile
 	@if [ $$(uname) == "Darwin" ]; then ln -fs $(PWD)/bash/osx_profile ~/.osx_profile; fi
 
+install-flake8:
+	@ln -fs $(PWD)/flake8 $(HOME)/.config/flake8
+
 install-postgres:
 	@ln -fs $(PWD)/psqlrc ~/.psqlrc
 
-install: install-bin install-git install-vim install-bash install-postgres
-
-ubuntu: fzf ubuntu-support install
+install: install-bin install-git install-neovim install-bash install-postgres
 

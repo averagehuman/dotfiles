@@ -232,6 +232,6 @@ map gd :Gdiff<CR>
 map gb :Gblame<CR>
 
 
-:nnoremap <Tab> :bnext<CR>
-:nnoremap <S-Tab> :bprevious<CR>
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
 

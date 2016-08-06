@@ -58,7 +58,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Colorized ls
-alias ls='ls -G'
+alias ls='ls --color'
 
 # Keep the color in less
 alias less='less -R'
@@ -74,6 +74,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias ..='cd ..'
+
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -96,3 +97,5 @@ fi;
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/gflanagan/.sdkman"
 [[ -s "/Users/gflanagan/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/gflanagan/.sdkman/bin/sdkman-init.sh"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

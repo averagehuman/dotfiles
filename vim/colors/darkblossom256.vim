@@ -1,5 +1,5 @@
 " Vim color file
-" Name: muddyblossom256
+" Name: darkblossom256
 " Maintainer: Gerard Flanagan
 " Last Change: 2015-12-10
 "
@@ -22,7 +22,7 @@ if version > 580
         syntax reset
     endif
 endif
-let g:colors_name="springblossom256"
+let g:colors_name="darkblossom256"
 
 if has("gui_running") || &t_Co == 88 || &t_Co == 256
     " functions {{{
@@ -266,7 +266,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("Statement", "cb6d8c", "", "bold")
     call <SID>X("Function", "00bb00", "", "bold")
     call <SID>X("PreProc", "ff0007", "", "")
-    call <SID>X("Comment", "ffff99", "000000", "")
+    call <SID>X("Comment", "ff3300", "000000", "")
     call <SID>X("Type", "70796b", "", "")
     call <SID>X("Error", "ffffff", "d40000", "")
     call <SID>X("Identifier", "ff0086", "", "")
@@ -291,7 +291,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("pythonClass", "ff0086", "", "")
     call <SID>X("pythonDecorator", "ff0000", "", "")
     call <SID>X("pythonDottedName", "ff0000", "", "")
-    call <SID>X("pythonComment", "ffff99", "000000", "")
+    call <SID>X("pythonComment", "ff3300", "000000", "")
 
     " HTML Highlighting
     call <SID>X("htmlTag", "00bdec", "", "")

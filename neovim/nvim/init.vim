@@ -3,13 +3,19 @@ set nosplitbelow         " new split window is always on top
 set winwidth=130
 set winminwidth=30
 set winheight=999
+set scrolloff=4          " keep 4 lines when scrolling
+set visualbell t_vb=     " disable horrible beep when a command doesn't work
+set tabstop=4            " how many spaces for a tab
+set shiftwidth=4
+set expandtab
+set wildmode=list,longest,full
 
 " Tell Vim which characters to show for expanded TABs,
 " trailing whitespace, and end-of-lines. VERY useful!
-if &listchars ==# 'eol:$'
-  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-endif
-set list                " Show problematic characters.
+" if &listchars ==# 'eol:$'
+"   set listchars=\ ,trail:-
+" endif
+" set list                " Show problematic characters.
 
 " Also highlight all tabs and trailing whitespace characters.
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
@@ -125,6 +131,10 @@ nnoremap <C-j> <C-w>j<C-w>_
 nnoremap <C-k> <C-w>k<C-w>_
 nnoremap <C-l> <C-w>l<C-w>_
 
+" Removes highlight of your last search
+nnoremap  <leader><space>  :nohl<CR>
+vnoremap  <leader><space>  :nohl<CR>
+
 " toggle NERDTree
 nnoremap <leader>t :NERDTreeToggle<cr>
 
@@ -137,7 +147,7 @@ nmap <leader>cx <Plug>(Exchange)
 vmap <leader>cc <Plug>(ExchangeLine)
 nmap <leader>cc <Plug>(ExchangeLine)
 
-autocmd BufWritePost *.scala :EnTypeCheck
-
+autocmd FileType make setlocal noexpandtab
+autocmd FileType scala setlocal ts=4 sw=4
 autocmd BufWritePost * Neomake
 

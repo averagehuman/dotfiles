@@ -95,3 +95,25 @@ fi;
 [[ "$(uname)" == "Darwin" ]] && [[ -e "~/.osx_profile" ]] && source ~/.osx_profile
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+get_src_path() {
+    # if $GOPATH is defined, then just echo it and return
+    if [ -n "$GOPATH" ]; then
+        echo $GOPATH
+        return
+    fi;
+    # else walk up the directory stack from the current directory until you find a 'src' folder
+    d=$(pwd);
+    while [ "$d" != "/" ]; do
+        if [ -d "$d/src" ]; then
+            echo $d
+            return
+        else
+            d=$(dirname $d)
+        fi
+    done
+    # didn't find a 'src' directory so echo a default
+    echo $HOME
+}
+
+alias ggo='GOPATH=$(get_src_path) go $*'

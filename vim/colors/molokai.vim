@@ -19,7 +19,7 @@ hi Folded          guifg=#666666 guibg=bg
 hi CursorLine                    guibg=#232728
 hi CursorColumn                  guibg=#232728
 hi ColorColumn                   guibg=#232728
-hi LineNr          guifg=#AAAAAA guibg=bg
+hi LineNr          guifg=#AAAAAA guibg=#000000
 hi FoldColumn      guifg=#AAAAAA guibg=bg
 hi VertSplit       guifg=#AAAAAA guibg=bg gui=none
 hi Search          guifg=#000000 guibg=#E4E500
@@ -92,7 +92,7 @@ hi Repeat          guifg=#F92672               gui=bold
 
 " marks column
 hi IndentGuides                  guibg=#373737
-hi SignColumn      guifg=#A6E22E
+hi SignColumn      guibg=#000000
 hi SpecialChar     guifg=#F92672               gui=bold
 hi SpecialComment  guifg=#FF3300               gui=bold
 hi Special         guifg=#66D9EF guibg=bg      gui=italic
@@ -192,7 +192,7 @@ if &t_Co > 255
    hi Search          ctermfg=253 ctermbg=66
 
    " marks column
-   hi SignColumn      ctermfg=118
+   hi SignColumn      ctermbg=232
    hi SpecialChar     ctermfg=161               cterm=bold
    hi SpecialComment  ctermfg=245               cterm=bold
    hi Special         ctermfg=81  ctermbg=232
@@ -228,7 +228,7 @@ if &t_Co > 255
    hi CursorLine                  ctermbg=234   cterm=none
    hi CursorColumn                ctermbg=234
    hi ColorColumn                 ctermbg=234
-   hi LineNr          ctermfg=250 ctermbg=233
+   hi LineNr          ctermfg=250 ctermbg=232
    hi NonText         ctermfg=240 ctermbg=0
 end " }}}
 

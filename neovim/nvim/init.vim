@@ -9,6 +9,7 @@ set tabstop=4            " how many spaces for a tab
 set shiftwidth=4
 set expandtab
 set wildmode=list,longest,full
+set number
 
 " Tell Vim which characters to show for expanded TABs,
 " trailing whitespace, and end-of-lines. VERY useful!
@@ -70,6 +71,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'pangloss/vim-javascript'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'fatih/vim-go'
 
 call plug#end()
 
@@ -80,6 +82,8 @@ call plug#end()
 "let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_highlight_lines = 0
+let g:gitgutter_map_keys = 0
+let g:gitgutter_override_sign_column_highlight = 0
 
 " neomake error window
 let g:neomake_open_list = 0

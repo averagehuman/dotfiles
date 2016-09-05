@@ -61,7 +61,7 @@ install-neovim:
 		$(NEOVIM_PY3_ENV)/bin/pip install -U pip; \
 	fi
 	@$(NEOVIM_PY3_ENV)/bin/pip install -r $(PWD)/neovim/requirements.txt
-	@rm -rf $(NEOVIM_CONF_DIR) && mkdir -p $$(dirname $(NEOVIM_CONF_DIR)) ln -fs $(PWD)/neovim/nvim $(NEOVIM_CONF_DIR)
+	@rm -rf $(NEOVIM_CONF_DIR) && mkdir -p $$(dirname $(NEOVIM_CONF_DIR)) && ln -fs $(PWD)/neovim/nvim $(NEOVIM_CONF_DIR)
 	@nvim +PlugInstall +qall
 
 install-bash:

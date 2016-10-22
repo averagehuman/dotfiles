@@ -4,17 +4,5 @@ alias ls='ls -G'
 export M2_HOME=$(cd ~ && pwd)/Applications/apache-maven-3.3.3
 export PATH=$PATH:$M2_HOME/bin
 
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home
-export GRAILS_HOME=$(cd ~ && pwd)/working/DariusCloud-web-layer/buildout/darius-tools/dest/grails-3.0.1
-export GRAILS_OPTS="-XX:-UseSplitVerifier -Xverify:none"
-
-export PATH="$PATH:$GRAILS_HOME/bin"
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-# Load RVM into a shell session *as a function*
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-export DOCKER_CERT_PATH=/Users/gflanagan/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
-export DOCKER_HOST=tcp://192.168.59.103:2376
+export JAVA_HOME=$(/usr/libexec/java_home)
 

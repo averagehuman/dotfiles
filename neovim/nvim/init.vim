@@ -8,7 +8,7 @@ set visualbell t_vb=     " disable horrible beep when a command doesn't work
 set tabstop=4            " how many spaces for a tab
 set shiftwidth=4
 set expandtab
-set wildmode=list,longest,full
+set wildmode=list:longest,full
 set number
 
 " Tell Vim which characters to show for expanded TABs,
@@ -72,6 +72,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go'
+Plug 'udalov/kotlin-vim'
 
 call plug#end()
 

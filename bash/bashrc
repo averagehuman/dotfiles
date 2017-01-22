@@ -119,6 +119,12 @@ get_src_path() {
 # Run Go with an auto-determined GOPATH set
 alias ggo='GOPATH=$(get_src_path) go $*'
 
+GOPATH=$HOME/working/learn-go.git
+
+export GOPATH
+
+PATH="$GOPATH/bin:"$PATH
+
 # Java
 #export JAVA_HOME="/usr/lib/jvm/java-7-oracle"
 export JAVA_HOME="/usr/lib/jvm/java-8-oracle"

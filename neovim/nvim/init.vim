@@ -72,6 +72,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go'
+Plug 'zchee/deoplete-go'
 Plug 'udalov/kotlin-vim'
 
 call plug#end()

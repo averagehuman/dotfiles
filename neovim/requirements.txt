@@ -2,3 +2,5 @@
 neovim
 jedi
 flake8
+websocket-client
+sexpdata

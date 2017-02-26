@@ -96,32 +96,7 @@ fi;
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-get_src_path() {
-    # if $GOPATH is defined, then just echo it and return
-    if [ -n "$GOPATH" ]; then
-        echo $GOPATH
-        return
-    fi;
-    # else walk up the directory stack from the current directory until you find a 'src' folder
-    d=$(pwd);
-    while [ "$d" != "/" ]; do
-        if [ -d "$d/src" ]; then
-            echo $d
-            return
-        else
-            d=$(dirname $d)
-        fi
-    done
-    # didn't find a 'src' directory so echo a default
-    echo $HOME
-}
-
-# Run Go with an auto-determined GOPATH set
-alias ggo='GOPATH=$(get_src_path) go $*'
-
 GOPATH=$HOME/working/learn-go.git
-
-export GOPATH
 
 PATH="$GOPATH/bin:"$PATH
 
@@ -135,4 +110,11 @@ PATH="/opt/intellij/bin:"$PATH
 # kotlin
 PATH="/opt/kotlinc/bin:"$PATH
 
+CLASSPATH=".:/usr/local/lib/antlr-4.6-complete.jar:$CLASSPATH"
+alias antlr4='java -jar /usr/local/lib/antlr-4.6-complete.jar'
+
 export PATH
+export CLASSPATH
+export GOPATH
+
+source /usr/local/bin/virtualenvwrapper.sh

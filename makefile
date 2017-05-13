@@ -75,6 +75,9 @@ install-flake8:
 install-postgres:
 	@ln -fs $(PWD)/psqlrc ~/.psqlrc
 
-install: install-bin install-git install-neovim install-bash install-postgres install-flake8
+install-jshint:
+	@ln -fs $(PWD)/jshintrc $(HOME)/.jshintrc
+
+install: install-bin install-git install-neovim install-bash install-postgres install-flake8 install-jshint
 
 

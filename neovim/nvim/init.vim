@@ -95,15 +95,16 @@ let g:gitgutter_override_sign_column_highlight = 0
 " ... error window
 let g:neomake_open_list = 0
 " ... js lint
-"let g:neomake_javascript_jshint_maker = {
-"    \ 'args': ['--verbose'],
-"    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-"    \ }
-"let g:neomake_javascript_enabled_makers = ['jshint']
+let g:neomake_javascript_jshint_maker = {
+    \ 'args': ['--verbose'],
+    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+    \ }
+let g:neomake_javascript_enabled_makers = ['jshint']
 
 " deoplete code completion
 set completeopt=longest,menuone,preview
 let g:deoplete#enable_at_startup = 1
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 " deoplete: javascript
 let g:deoplete#omni#functions = {}

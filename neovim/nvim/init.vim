@@ -37,6 +37,7 @@ colorscheme molokai
 let g:python_host_prog = expand('~/.pyenv/neovim/bin/python')
 let g:python3_host_prog = expand('~/.pyenv3/neovim/bin/python')
 
+filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin management using vim-plug (run :PlugInstall to install)
 " (ref. http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/)
@@ -51,24 +52,27 @@ endfunction
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'neomake/neomake'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'davidhalter/jedi-vim'
-Plug 'neomake/neomake'
 Plug 'airblade/vim-gitgutter'
 Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'othree/html5.vim'
-Plug 'ensime/ensime-vim'
-Plug 'derekwyatt/vim-scala'
 Plug 'tommcdo/vim-exchange'
 Plug 'sickill/vim-pasta'
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" javascript
 Plug 'pangloss/vim-javascript'
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/vim-go'
@@ -87,11 +91,26 @@ let g:gitgutter_highlight_lines = 0
 let g:gitgutter_map_keys = 0
 let g:gitgutter_override_sign_column_highlight = 0
 
-" neomake error window
+" neomake
+" ... error window
 let g:neomake_open_list = 0
+" ... js lint
+"let g:neomake_javascript_jshint_maker = {
+"    \ 'args': ['--verbose'],
+"    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+"    \ }
+"let g:neomake_javascript_enabled_makers = ['jshint']
 
 " deoplete code completion
+set completeopt=longest,menuone,preview
 let g:deoplete#enable_at_startup = 1
+
+" deoplete: javascript
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = ['tern#Complete', 'jspc#omni']
+let g:tern#filetypes = ['jsx', 'javascript.jsx', 'vue']
+let g:tern#command = ["/usr/bin/tern"]
+let g:tern#arguments = ["--persistent"]
 
 " jedi-vim
 let g:jedi#use_tabs_not_buffers = 0
@@ -154,6 +173,5 @@ vmap <leader>cc <Plug>(ExchangeLine)
 nmap <leader>cc <Plug>(ExchangeLine)
 
 autocmd FileType make setlocal noexpandtab
-autocmd FileType scala setlocal ts=4 sw=4
 autocmd BufWritePost * Neomake
 

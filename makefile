@@ -2,31 +2,21 @@
 
 SHELL := /bin/bash
 PWD := $(shell pwd)
-NEOVIM_PY2_ENV := $(HOME)/.pyenv/neovim
-NEOVIM_PY3_ENV := $(HOME)/.pyenv3/neovim
 NEOVIM_CONF_DIR := $(HOME)/.config/nvim
+FZF_HOME := $(HOME)/.local/src/fzf.git
 
-environ:
-	@echo $(NEOVIM_PY2_ENV)
 
-# fuzzy file finder https://github.com/junegunn/fzf
-fzf:
-	@if [ ! -e $(HOME)/.fzf ]; then \
-		git clone https://github.com/junegunn/fzf.git $(HOME)/.fzf; \
-	else \
-	     cd $(HOME)/.fzf && git pull; \
-	fi
-	@cd $(HOME)/.fzf && ./install --no-key-bindings --no-completion --no-update-rc
-
-ubuntu-support:
+# needs sudo
+ubuntu:
 	@apt-get -y install python-dev python-pip python3-dev python3-pip
 	@add-apt-repository -y ppa:neovim-ppa/unstable
 	@apt-get update
 	@apt-get -y install neovim
-	@apt-get -y install silversearcher-ag
-
-# needs sudo
-ubuntu: ubuntu-support fzf
+	@apt-get -y install silversearcher-ag curl
+	@pip install -U pip
+	@pip3 install -U pip
+	@pip install neovim
+	@pip3 install neovim
 
 #----------------------------------------------------------------------------------------
 # install targets
@@ -51,16 +41,6 @@ install-vim:
 	@vim +PlugInstall +qall
 
 install-neovim:
-	@if [ ! -e $(NEOVIM_PY2_ENV) ]; then \
-		mkdir -p $(NEOVIM_PY2_ENV) && virtualenv --python=python2 $(NEOVIM_PY2_ENV); \
-		$(NEOVIM_PY2_ENV)/bin/pip install -U pip; \
-	fi
-	@$(NEOVIM_PY2_ENV)/bin/pip install -r $(PWD)/neovim/requirements.txt
-	@if [ ! -e $(NEOVIM_PY3_ENV) ]; then \
-		mkdir -p $(NEOVIM_PY3_ENV) && virtualenv --python=python3 $(NEOVIM_PY3_ENV); \
-		$(NEOVIM_PY3_ENV)/bin/pip install -U pip; \
-	fi
-	@$(NEOVIM_PY3_ENV)/bin/pip install -r $(PWD)/neovim/requirements.txt
 	@rm -rf $(NEOVIM_CONF_DIR) && mkdir -p $$(dirname $(NEOVIM_CONF_DIR)) && ln -fs $(PWD)/neovim/nvim $(NEOVIM_CONF_DIR)
 	@nvim +PlugInstall +qall
 
@@ -78,6 +58,11 @@ install-postgres:
 install-jshint:
 	@ln -fs $(PWD)/jshintrc $(HOME)/.jshintrc
 
-install: install-bin install-git install-neovim install-bash install-postgres install-flake8 install-jshint
+# fuzzy file finder https://github.com/junegunn/fzf
+install-fzf:
+	@test -d $(HOME)/.local/src || mkdir -p $(HOME)/.local/src
+	@test -d $(FZF_HOME) || (git clone https://github.com/junegunn/fzf.git $(FZF_HOME) && cd $(FZF_HOME) && ./install)
+
+install: install-bin install-git install-neovim install-bash install-postgres install-flake8 install-jshint install-fzf
 
 

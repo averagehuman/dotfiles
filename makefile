@@ -8,11 +8,19 @@ FZF_HOME := $(HOME)/.local/src/fzf.git
 
 # needs sudo
 ubuntu:
+	# neovim
 	@apt-get -y install python-dev python-pip python3-dev python3-pip
 	@add-apt-repository -y ppa:neovim-ppa/unstable
+	# docker
+	@apt-get -y install apt-transport-https ca-certificates curl software-properties-common
+	@curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+	@apt-key fingerprint 0EBFCD88
+	@add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $$(lsb_release -cs) stable"
 	@apt-get update
-	@apt-get -y install neovim
 	@apt-get -y install silversearcher-ag curl
+	@apt-get -y install neovim
+	@apt-get -y install docker-ce=17.12.0~ce-0~ubuntu
+	@usermod -aG docker $$USER
 	@pip install -U pip
 	@pip3 install -U pip
 	@pip install neovim
@@ -63,6 +71,8 @@ install-fzf:
 	@test -d $(HOME)/.local/src || mkdir -p $(HOME)/.local/src
 	@test -d $(FZF_HOME) || (git clone https://github.com/junegunn/fzf.git $(FZF_HOME) && cd $(FZF_HOME) && ./install)
 
+install-docker:
+	@
 install: install-bin install-git install-neovim install-bash install-postgres install-flake8 install-jshint install-fzf
 
 

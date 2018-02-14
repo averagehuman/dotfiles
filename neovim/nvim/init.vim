@@ -36,8 +36,8 @@ endif
 set background=dark
 colorscheme molokai
 
-"let g:python_host_prog = expand('~/.pyenv/neovim/bin/python')
-"let g:python3_host_prog = expand('~/.pyenv3/neovim/bin/python')
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
 
 filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

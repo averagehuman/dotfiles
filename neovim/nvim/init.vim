@@ -12,6 +12,8 @@ set wildmode=list:longest,full
 set number
 set signcolumn=yes
 set guicursor=
+"set termguicolors
+let loaded_matchparen = 1
 
 " Tell Vim which characters to show for expanded TABs,
 " trailing whitespace, and end-of-lines. VERY useful!
@@ -20,26 +22,21 @@ set guicursor=
 " endif
 " set list                " Show problematic characters.
 
-" Also highlight all tabs and trailing whitespace characters.
-highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-match ExtraWhitespace /\s\+$\|\t/
-
-set colorcolumn=120
+set colorcolumn=100
 highlight ColorColumn ctermbg=9
 
-let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-
-if &t_Co > 1
-   syntax enable
-endif
-
 set background=dark
-colorscheme molokai
+colorscheme railscasts
 
 let g:python_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/bin/python3'
 
 filetype plugin indent on
+if &t_Co > 1
+   syntax enable
+endif
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin management using vim-plug (run :PlugInstall to install)
 " (ref. http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/)
@@ -54,7 +51,7 @@ endfunction
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -67,13 +64,15 @@ Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'othree/html5.vim'
-Plug 'tommcdo/vim-exchange'
 Plug 'sickill/vim-pasta'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'leshill/vim-json'
+Plug 'w0rp/ale'
 " javascript
 Plug 'pangloss/vim-javascript'
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/jspc.vim'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -85,6 +84,9 @@ call plug#end()
 "let python_highlight_all = 1
 "let python_highlight_space_errors = 0
 
+" vim-better-whitespace
+let g:show_spaces_that_precede_tabs=1
+
 " gitgutter
 "let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_highlight_lines = 0
@@ -93,13 +95,13 @@ let g:gitgutter_override_sign_column_highlight = 0
 
 " neomake
 " ... error window
-let g:neomake_open_list = 0
-" ... js lint
-let g:neomake_javascript_jshint_maker = {
-    \ 'args': ['--verbose'],
-    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-    \ }
-let g:neomake_javascript_enabled_makers = ['jshint']
+" let g:neomake_open_list = 0
+" " ... js lint
+" let g:neomake_javascript_jshint_maker = {
+"     \ 'args': ['--verbose'],
+"     \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+"     \ }
+" let g:neomake_javascript_enabled_makers = ['jshint']
 
 " deoplete code completion
 set completeopt=longest,menuone,preview
@@ -109,8 +111,10 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 " deoplete: javascript
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = ['tern#Complete', 'jspc#omni']
-let g:tern#filetypes = ['jsx', 'javascript.jsx', 'vue']
-let g:tern#command = ["/usr/bin/tern"]
+let g:tern#filetypes = ['js', 'jsx', 'javascript.jsx', 'vue']
+" run 'npm install' from the tern_for_vim directory, otherwise install tern
+" with the system npm and uncomment the next line
+"let g:tern#command = ["/usr/bin/tern"]
 let g:tern#arguments = ["--persistent"]
 
 " jedi-vim
@@ -136,7 +140,7 @@ let g:airline_left_sep = ' '
 let g:airline_left_alt_sep = '|'
 let g:airline_right_sep = ' '
 let g:airline_right_alt_sep = '|'
-let g:airline_theme= 'badwolf'
+let g:airline_theme= 'papercolor'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Keyboard mappings
@@ -167,12 +171,19 @@ nnoremap <leader>t :NERDTreeToggle<cr>
 " toggle Tag Browser
 nnoremap <leader>b :TagbarToggle<CR>
 
-" vim-exchange
-vmap <leader>cx <Plug>(Exchange)
-nmap <leader>cx <Plug>(Exchange)
-vmap <leader>cc <Plug>(ExchangeLine)
-nmap <leader>cc <Plug>(ExchangeLine)
+" " Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>gy  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy  "+yy
+
+" " Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+
 
 autocmd FileType make setlocal noexpandtab
-autocmd BufWritePost * Neomake
+"autocmd BufWritePost * Neomake
 

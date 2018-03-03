@@ -110,6 +110,10 @@ PATH="/opt/kotlinc/bin:"$PATH
 # go
 export PATH=$PATH:$HOME/go/bin:/usr/local/go/bin
 
+# pyenv
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

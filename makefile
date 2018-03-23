@@ -19,10 +19,14 @@ ubuntu:
 	@curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 	@apt-key fingerprint 0EBFCD88
 	@add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $$(lsb_release -cs) stable"
+	# yarn (npm alternative)
+	@curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+	@echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 	@apt-get update
 	@apt-get -y install silversearcher-ag
 	@apt-get -y install neovim
 	@apt-get -y install docker-ce=17.12.0~ce-0~ubuntu
+	@apt-get -y install --no-install-recommends yarn
 	@usermod -aG docker $$USER
 	@pip install -U pip
 	@pip3 install -U pip

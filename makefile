@@ -18,11 +18,15 @@ ubuntu:
 	@apt-get -y install xz-utils tk-dev
 	@apt-get -y install python-dev python-pip python3-dev python3-pip
 	@apt-get -y install silversearcher-ag exuberant-ctags
-	@apt-get -y install neovim python-neovim python3-neovim
+	@apt-get -y install python-neovim python3-neovim
 	@pip2 install -U pip
 	@pip3 install -U pip
 	@pip2 install -U pynvim jedi
 	@pip3 install -U pynvim jedi
+	@wget --quiet https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage --output-document nvim
+	@chmod +x nvim
+	@chown root:root nvim
+	@mv nvim /usr/bin
 
 #----------------------------------------------------------------------------------------
 # install targets

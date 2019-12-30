@@ -98,8 +98,14 @@ fi;
 
 
 # Java
-#export JAVA_HOME="/usr/lib/jvm/java-7-oracle"
-export JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+#export JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export ANDROID_NDK_HOME=$ANDROID_HOME/ndk-bundle
+export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_NDK_HOME
+ANDROID_STUDIO_HOME=$HOME/Applications/android-studio
+export JAVA_HOME=$ANDROID_STUDIO_HOME/jre
+export PATH=${PATH}:$ANDROID_STUDIO_HOME/gradle/gradle-5.1.1/bin
 
 # intellij IDE
 PATH="/opt/intellij/bin:"$PATH
@@ -118,3 +124,7 @@ eval "$(pyenv virtualenv-init -)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/kraydel-gmf/.sdkman"
+[[ -s "/home/kraydel-gmf/.sdkman/bin/sdkman-init.sh" ]] && source "/home/kraydel-gmf/.sdkman/bin/sdkman-init.sh"

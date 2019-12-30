@@ -1,10 +1,7 @@
 
 [user]
-    name = averagehuman
-    email = cyclebelfast@gmail.com
-
-[github]
-    user = averagehuman
+    name = gflanagan
+    email = gerard.flanagan@kraydel.com
 
 [core]
     excludesfile = ~/.gitignore

@@ -81,6 +81,7 @@ Plug 'zchee/deoplete-go'
 
 call plug#end()
 
+
 "let python_highlight_all = 1
 "let python_highlight_space_errors = 0
 
@@ -105,6 +106,7 @@ let g:gitgutter_override_sign_column_highlight = 0
 
 " deoplete code completion
 set completeopt=longest,menuone,preview
+let g:deoplete#num_processes = 1
 let g:deoplete#enable_at_startup = 1
 let g:SuperTabClosePreviewOnPopupClose = 1
 

@@ -107,14 +107,6 @@ ANDROID_STUDIO_HOME=$HOME/Applications/android-studio
 export JAVA_HOME=$ANDROID_STUDIO_HOME/jre
 export PATH=${PATH}:$ANDROID_STUDIO_HOME/gradle/gradle-5.1.1/bin
 
-# intellij IDE
-PATH="/opt/intellij/bin:"$PATH
-
-# kotlin
-PATH="/opt/kotlinc/bin:"$PATH
-
-# go
-export PATH=$PATH:$HOME/go/bin:/usr/local/go/bin
 
 # pyenv
 export PATH="$HOME/.pyenv/bin:$PATH"
@@ -125,6 +117,3 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/kraydel-gmf/.sdkman"
-[[ -s "/home/kraydel-gmf/.sdkman/bin/sdkman-init.sh" ]] && source "/home/kraydel-gmf/.sdkman/bin/sdkman-init.sh"

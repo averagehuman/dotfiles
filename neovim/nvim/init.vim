@@ -41,46 +41,45 @@ autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 " Plugin management using vim-plug (run :PlugInstall to install)
 " (ref. http://yannesposito.com/Scratch/en/blog/Vim-as-IDE/)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if empty(glob("~/.config/nvim/autoload/plug.vim"))
-    execute '!curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+if empty(glob("~/.local/share/nvim/site/autoload/plug.vim"))
+    execute '!curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
 
 function! DoRemote(arg)
     UpdateRemotePlugins
 endfunction
 
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
-"Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-commentary'
+"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'davidhalter/jedi-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
 Plug 'othree/html5.vim'
-Plug 'sickill/vim-pasta'
+"Plug 'sickill/vim-pasta'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'leshill/vim-json'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
+
 " javascript
-Plug 'pangloss/vim-javascript'
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'sheerun/vim-polyglot'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/jspc.vim'
+"Plug 'othree/jspc.vim'
+Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'fatih/vim-go'
-Plug 'zchee/deoplete-go'
 
 call plug#end()
 
+let g:ale_sign_column_always = 1
 
 "let python_highlight_all = 1
 "let python_highlight_space_errors = 0

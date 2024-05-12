@@ -4,6 +4,9 @@ SHELL := /bin/bash
 PWD := $(shell pwd)
 USER_BIN := $(HOME)/bin
 
+ubuntu.apt:
+	@sudo apt-get -y install curl fontconfig
+
 ubuntu.spacevim:
 	@curl -sLf https://spacevim.org/install.sh | bash
 

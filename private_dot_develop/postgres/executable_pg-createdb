@@ -1,0 +1,38 @@
+#!/bin/bash
+
+PROJECT="$1"
+ADMIN_USER="admin"
+
+if [[ -z "$PROJECT" ]]; then
+    echo "ERROR: a project name is required"
+    exit 1
+fi
+
+if ! id "$ADMIN_USER" &>/dev/null; then
+    echo "ERROR: user doesn't exist - $ADMIN_USER"
+    exit 1
+fi
+
+password=$(< /dev/urandom tr -dc 'A-Za-z0-9!%^*}(+=' | head -c 40)
+
+echo ":: creating db $PROJECT"
+temp_file=$(mktemp)
+echo $temp_file
+cat << EOF > $temp_file
+CREATE DATABASE $PROJECT;
+CREATE USER $PROJECT WITH PASSWORD '$password';
+ALTER ROLE $PROJECT SET client_encoding TO 'utf8';
+ALTER ROLE $PROJECT SET default_transaction_isolation TO 'read committed';
+ALTER ROLE $PROJECT SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE $PROJECT TO $PROJECT;
+EOF
+
+#cat $temp_file
+chown db:db $temp_file
+su - db -c "psql -f $temp_file"
+rm $temp_file
+
+echo ":: created db and associated owner role"
+echo $password > .dbpass
+chmod 600 .dbpass
+echo ":: wrote owner password to file .dbpass"

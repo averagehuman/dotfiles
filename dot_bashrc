@@ -137,16 +137,22 @@ if ! shopt -oq posix; then
   fi
 fi
 
+PATH="$HOME/bin:$PATH"
 # android
-PATH="/opt/android-studio/android-studio-2022.2.1.20/bin:$PATH"
-PATH="/opt/intellij/idea-IU-231.9011.34/bin:$PATH"
+# PATH="/opt/android-studio/android-studio-2022.2.1.20/bin:$PATH"
+# PATH="/opt/intellij/idea-IU-231.9011.34/bin:$PATH"
+
 # brew
-PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+if [[ -d /home/linuxbrew/.linuxbrew/bin ]]; then
+    PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+fi
 
 # pyenv
-PATH="$HOME/.pyenv/bin:$HOME/.pyenv/shims:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if [[ -d $HOME/.pyenv/bin ]]; then
+    PATH="$HOME/.pyenv/bin:$HOME/.pyenv/shims:$PATH"
+    eval "$(pyenv init -)"
+    #eval "$(pyenv virtualenv-init -)"
+fi
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
@@ -154,8 +160,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-. "$HOME/.cargo/env"
 
 # golang
-PATH="/usr/local/go/bin:$PATH"
-export PATH="/home/averagehuman/.local/bin:$PATH"
+if [[ -d /usr/local/go/bin ]]; then
+    PATH="/usr/local/go/bin:$PATH"
+fi
+
+export PATH="$HOME/.local/bin:$PATH"

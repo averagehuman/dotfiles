@@ -1,0 +1,6 @@
+
+alias vim="nvim"
+alias vi="nvim"
+alias oldvim="vim"
+alias k="kubectl"
+alias kc="kubectl"
